@@ -96,7 +96,7 @@ namespace MyProject.Web.Controllers
             DoctorViewModel doctorViewModel = ViewModels.Helpers.CreateDoctorViewModelFromDoctor(doctor);
          
             doctorViewModel.MessageToClient = string.Format("You are about to permenantly delete this doctor!");
-            //doctorViewModel.ObjectState = ObjectState.Deleted;  ////this was your change
+            doctorViewModel.ObjectState = ObjectState.Deleted;  
 
             return View(doctorViewModel);
 
@@ -117,9 +117,33 @@ namespace MyProject.Web.Controllers
         {
             Doctor doctor = ViewModels.Helpers.CreateDoctorFromDoctorViewModel(doctorViewModel);
 
-           // doctor.ObjectState = doctorViewModel.ObjectState;//you changed this
-
             doctorContext.Doctors.Attach(doctor);
+            if (doctor.ObjectState == ObjectState.Deleted)
+            {
+                foreach (PatientViewModel patientViewModel in doctorViewModel.Patients)
+                {
+                    Patient patient = doctorContext.Patients.Find(patientViewModel.PatientId);
+
+                    if (patient != null)
+                    {
+                        patient.ObjectState = ObjectState.Deleted;
+                    }
+                }
+            }
+            else
+            {
+
+                foreach (int patientId in doctorViewModel.PatientsToDelete)
+                {
+                    Patient patient = doctorContext.Patients.Find(patientId);
+
+                    if (patient != null)
+                    {
+                        patient.ObjectState = ObjectState.Deleted;
+                    }
+                }
+            }
+
             doctorContext.ApplyStateChanges();
             doctorContext.SaveChanges();
 
@@ -130,7 +154,7 @@ namespace MyProject.Web.Controllers
 
             doctorViewModel = ViewModels.Helpers.CreateDoctorViewModelFromDoctor(doctor);
             doctorViewModel.MessageToClient = messageToClient;
-          // doctorViewModel.ObjectState = ObjectState.Unchanged;///you changed this
+          
        
             
 

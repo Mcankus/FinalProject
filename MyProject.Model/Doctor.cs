@@ -15,6 +15,7 @@ namespace MyProject.Model
         public string DoctorName { get; set; }
         public string PracticeName { get; set; }
         public int DoctorId { get; set; }
+        //public string Photo { get; set; }
 
         public ObjectState ObjectState { get; set; }
 

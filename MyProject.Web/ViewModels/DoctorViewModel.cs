@@ -11,6 +11,7 @@ namespace MyProject.Web.ViewModels
         public DoctorViewModel()
         {
             Patients = new List<PatientViewModel>();
+            PatientsToDelete = new List<int>();
         }
 
         public string DoctorName { get; set; }
@@ -24,7 +25,9 @@ namespace MyProject.Web.ViewModels
 
         public ObjectState ObjectState { get; set; }
 
-        public  List<PatientViewModel> Patients { get; set; } 
+        public  List<PatientViewModel> Patients { get; set; }
+
+        public List<int> PatientsToDelete { get; set; } 
   
     }
 }

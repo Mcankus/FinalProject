@@ -62,4 +62,10 @@ DoctorViewModel = function (data) {
         self.Patients.push(patient);
     };
 
+    self.deletePatient = function(patient) {
+        self.Patients.remove(this);
+
+        if (patient.PatientId() > 0 && self.PatientsToDelete.indexOf(patient.PatientId()) == -1)
+            self.PatientsToDelete.push(patient.PatientId());
+    };
 };
