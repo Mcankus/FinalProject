@@ -20,12 +20,16 @@ namespace MyProject.DataLayer.Migrations
         {
             context.Doctors.AddOrUpdate(
       d => d.DoctorName,
-      new Doctor { DoctorName = "Dr. Alan Smith", PracticeName = "Alachua Family Health" },
-      new Doctor { DoctorName = "Dr. Kevin Ricker", PracticeName = "Alachua Family Health" },
+      new Doctor { DoctorName = "Dr. Alan Smith", PracticeName = "Alachua Family Health", Patients =
+      {
+          new Patient{FirstName = "Robert", LastName = "Green", Street = "123 Main St.", City = "Alachua", State = "FL", ZipCode = "34567", PhoneNumber = "456-989-0909"},
+          new Patient{FirstName = "Amy", LastName = "Bridgers", Street = "47 Elm St.", City = "Alachua", State = "FL", ZipCode = "34562", PhoneNumber = "555-56-5968"}
+      }},
+     new Doctor { DoctorName = "Dr. Kevin Ricker", PracticeName = "Alachua Family Health" },
       new Doctor { DoctorName = "Dr. Bruce Dillon", PracticeName = "Alachua Family Health" },
       new Doctor { DoctorName = "Dr. Amy Merino", PracticeName = "Alachua Family Health" },
-      new Doctor { DoctorName = "Dr. Leslie Veech", PracticeName = "GainesVille Health Clinic" },
-      new Doctor { DoctorName = "Dr. William Wong", PracticeName = "GainesVille Health Clinic" },
+      new Doctor { DoctorName = "Dr. Leslie Veech", PracticeName = "Gainesville Health Clinic" },
+      new Doctor { DoctorName = "Dr. William Wong", PracticeName = "Gainesville Health Clinic" },
       new Doctor { DoctorName = "Dr. Mark Harden", PracticeName = "Family Medical Services" },
       new Doctor { DoctorName = "Dr. James Grooms", PracticeName = "Jacksonville Health" },
       new Doctor { DoctorName = "Dr. Ginger Wells", PracticeName = "Jacksonville Health" },

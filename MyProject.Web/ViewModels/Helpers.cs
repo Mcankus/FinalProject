@@ -15,6 +15,25 @@ namespace MyProject.Web.ViewModels
             doctorViewModel.DoctorId = doctor.DoctorId;
             doctorViewModel.DoctorName = doctor.DoctorName;
             doctorViewModel.PracticeName = doctor.PracticeName;
+            doctorViewModel.ObjectState = ObjectState.Unchanged;
+
+            foreach (Patient patient in doctor.Patients)
+            {
+                PatientViewModel patientViewModel = new PatientViewModel();
+                patientViewModel.PatientId = patient.PatientId;
+                patientViewModel.FirstName = patient.FirstName;
+                patientViewModel.LastName = patient.LastName;
+                patientViewModel.Street = patient.Street;
+                patientViewModel.City = patient.City;
+                patientViewModel.State = patient.State;
+                patientViewModel.ZipCode = patient.ZipCode;
+                patientViewModel.PhoneNumber = patient.PhoneNumber;
+
+                patientViewModel.ObjectState = ObjectState.Unchanged;
+
+                patientViewModel.DoctorId = patient.DoctorId;
+                doctorViewModel.Patients.Add(patientViewModel);
+            }
 
 
             return doctorViewModel;
@@ -28,6 +47,37 @@ namespace MyProject.Web.ViewModels
             doctor.DoctorId = doctorViewModel.DoctorId;
             doctor.DoctorName = doctorViewModel.DoctorName;
             doctor.PracticeName = doctorViewModel.PracticeName;
+            doctor.ObjectState = doctorViewModel.ObjectState;
+
+            int temporaryPatientId = -1;
+
+            foreach (PatientViewModel patientViewModel in doctorViewModel.Patients)
+            {
+                Patient patient = new Patient();
+                patient.FirstName = patientViewModel.FirstName;
+                patient.LastName = patientViewModel.LastName;
+                patient.Street = patientViewModel.Street;
+                patient.City = patientViewModel.City;
+                patient.State = patientViewModel.State;
+                patient.ZipCode = patientViewModel.ZipCode;
+                patient.PhoneNumber = patientViewModel.PhoneNumber;
+                patient.ObjectState = patientViewModel.ObjectState;
+
+
+                if (patientViewModel.ObjectState != ObjectState.Added)
+                    patient.PatientId = patientViewModel.PatientId;
+                else
+                {
+                    patientViewModel.PatientId = temporaryPatientId;
+                    temporaryPatientId--;
+                }
+                patient.DoctorId = doctorViewModel.DoctorId;
+
+                doctor.Patients.Add(patient);
+
+
+
+            }
 
             return doctor;
         }
@@ -38,7 +88,7 @@ namespace MyProject.Web.ViewModels
             switch (objectState)
             {
                 case ObjectState.Added:
-                    messageToClient = string.Format("{0} has been added to the database", doctorName);
+                    messageToClient = string.Format("{0} has been added to the database.", doctorName);
                     break;
 
                 case ObjectState.Modified:

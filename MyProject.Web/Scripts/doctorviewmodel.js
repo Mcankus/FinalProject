@@ -5,9 +5,33 @@
     Deleted: 3
 };
 
+var patientMapping = {
+    'Patients': {
+        key: function(patient) {
+            return ko.utils.unwrapObservable(patient.PatientId);
+        },
+        create: function(options) {
+            return new PatientViewModel(options.data);
+        }
+
+    }
+};
+
+PatientViewModel = function(data) {
+    var self = this;
+    ko.mapping.fromJS(data, patientMapping, self);
+
+    self.flagPatientAsEdited = function() {
+        if (self.ObjectState != ObjectState.Added) {
+            self.ObjectState(ObjectState.Modified);
+        }
+        return true;
+    };
+};
+
 DoctorViewModel = function (data) {
     var self = this;
-    ko.mapping.fromJS(data, {}, self);
+    ko.mapping.fromJS(data, patientMapping, self);
 
     self.save = function() {
             $.ajax({
@@ -25,12 +49,17 @@ DoctorViewModel = function (data) {
             });
     },
 
-        self.flagSalesOrderAsEdited = function () {
+        self.flagDoctorAsEdited = function () {
            
             if (self.ObjectState() != ObjectState.Added) {
                 self.ObjectState(ObjectState.Modified);
             }
             return true;
         };
+
+    self.addPatient = function() {
+        var patient = new PatientViewModel({ PatientId: 0, FirstName: "First", LastName: "Last", Street: "", City: "", State: "", ZipCode: "", PhoneNumber: "", ObjectState: ObjectState.Added });
+        self.Patients.push(patient);
+    };
 
 };

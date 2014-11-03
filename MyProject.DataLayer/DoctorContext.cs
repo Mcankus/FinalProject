@@ -18,10 +18,12 @@ namespace MyProject.DataLayer
         }
 
         public DbSet<Doctor> Doctors { get; set; }
+        public DbSet<Patient> Patients { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new DoctorConfiguration());
+            modelBuilder.Configurations.Add(new PatientConfiguration());
         }
     }
 }

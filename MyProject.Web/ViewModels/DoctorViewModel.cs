@@ -8,6 +8,10 @@ namespace MyProject.Web.ViewModels
 {
     public class DoctorViewModel : IObjectWithState
     {
+        public DoctorViewModel()
+        {
+            Patients = new List<PatientViewModel>();
+        }
 
         public string DoctorName { get; set; }
         public string PracticeName { get; set; }
@@ -19,6 +23,8 @@ namespace MyProject.Web.ViewModels
 
 
         public ObjectState ObjectState { get; set; }
+
+        public  List<PatientViewModel> Patients { get; set; } 
   
     }
 }

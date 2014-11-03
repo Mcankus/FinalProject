@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Services.Description;
 using MyProject.Model;
 using MyProject.DataLayer;
 using MyProject.Web.ViewModels;
@@ -42,7 +43,7 @@ namespace MyProject.Web.Controllers
 
             DoctorViewModel doctorViewModel = ViewModels.Helpers.CreateDoctorViewModelFromDoctor(doctor);
 
-            doctorViewModel.MessageToClient = "I originated from the viewmodel, rather than the model.";
+           
 
             return View(doctorViewModel);
         }
@@ -73,7 +74,8 @@ namespace MyProject.Web.Controllers
             DoctorViewModel doctorViewModel = ViewModels.Helpers.CreateDoctorViewModelFromDoctor(doctor);
             
             doctorViewModel.MessageToClient = string.Format("The original Doctor name is {0}.", doctorViewModel.DoctorName);
-            doctorViewModel.ObjectState = ObjectState.Unchanged;
+            //doctorViewModel.ObjectState = ObjectState.Unchanged;//you changed this
+          
             
 
             return View(doctorViewModel);
@@ -94,7 +96,7 @@ namespace MyProject.Web.Controllers
             DoctorViewModel doctorViewModel = ViewModels.Helpers.CreateDoctorViewModelFromDoctor(doctor);
          
             doctorViewModel.MessageToClient = string.Format("You are about to permenantly delete this doctor!");
-            doctorViewModel.ObjectState = ObjectState.Deleted;
+            //doctorViewModel.ObjectState = ObjectState.Deleted;  ////this was your change
 
             return View(doctorViewModel);
 
@@ -114,20 +116,22 @@ namespace MyProject.Web.Controllers
         public JsonResult Save(DoctorViewModel doctorViewModel)
         {
             Doctor doctor = ViewModels.Helpers.CreateDoctorFromDoctorViewModel(doctorViewModel);
-            
-            doctor.ObjectState = doctorViewModel.ObjectState;
+
+           // doctor.ObjectState = doctorViewModel.ObjectState;//you changed this
 
             doctorContext.Doctors.Attach(doctor);
-            doctorContext.ChangeTracker.Entries<IObjectWithState>().Single().State = DataLayer.Helpers.ConvertState(doctor.ObjectState);
+            doctorContext.ApplyStateChanges();
             doctorContext.SaveChanges();
 
             if (doctor.ObjectState == ObjectState.Deleted)
                 return Json(new {newLocation = "/Doctor/Index"});
 
-            doctorViewModel.MessageToClient = ViewModels.Helpers.GetMessageToClient(doctorViewModel.ObjectState, doctor.DoctorName);
+            string messageToClient = ViewModels.Helpers.GetMessageToClient(doctorViewModel.ObjectState, doctor.DoctorName);
 
-            doctorViewModel.DoctorId = doctor.DoctorId;
-            doctorViewModel.ObjectState = ObjectState.Unchanged;
+            doctorViewModel = ViewModels.Helpers.CreateDoctorViewModelFromDoctor(doctor);
+            doctorViewModel.MessageToClient = messageToClient;
+          // doctorViewModel.ObjectState = ObjectState.Unchanged;///you changed this
+       
             
 
             return Json(new {doctorViewModel});

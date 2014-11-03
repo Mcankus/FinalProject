@@ -50,6 +50,7 @@
     <Compile Include="DoctorContext.cs" />
     <Compile Include="Helpers.cs" />
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="PatientConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
