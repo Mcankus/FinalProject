@@ -1,0 +1,24 @@
+﻿@model MyProject.Web.ViewModels.DoctorViewModel
+@using System.Activities.Expressions
+@using System.Web.Script.Serialization
+
+@{
+    ViewBag.Title = "Edit Doctor Information";
+}
+
+@{ string data = new JavaScriptSerializer().Serialize(Model);}
+
+@section scripts
+{
+
+    <script src="~/Scripts/knockout-3.2.0.js"></script>
+    <script src="~/Scripts/knockout.mapping-latest.js"></script>
+    <script src="~/Scripts/doctorviewmodel.js"></script>
+    <script type="text/javascript">
+        var doctorViewModel = new DoctorViewModel(@Html.Raw(data));
+        ko.applyBindings(doctorViewModel);
+    </script>
+
+}
+
+@Html.Partial("_EditDoctor")
