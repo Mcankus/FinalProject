@@ -15,6 +15,7 @@ namespace MyProject.DataLayer
         {
             Property(d => d.DoctorName).HasMaxLength(30).IsRequired();
             Property(d => d.PracticeName).HasMaxLength(30).IsOptional();
+            Property(d => d.Photo).HasMaxLength(20).IsOptional();
             Ignore(d=> d.ObjectState);
         }
     }

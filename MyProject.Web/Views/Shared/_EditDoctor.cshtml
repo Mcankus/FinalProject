@@ -9,45 +9,50 @@
 
 <p style="color: red" data-bind="text: MessageToClient" class="col-lg-10 col-md-8 col-sm-6 col-xs-4 col-md-offset-1"></p>
 
-<div>
+<form>
     <div class="form-group col-lg-2 col-md-2  col-md-offset-1">
         <label class="control-label" for="DoctorName">Doctor Name: </label>
-        <input class="form-control" name="DoctorName" id="DoctorName" data-bind="value: DoctorName, event: {change: flagDoctorAsEdited}" />
+        <input class="form-control" required name="DoctorName" id="DoctorName" data-bind="value: DoctorName, event: {change: flagDoctorAsEdited}" />
     </div>
     <div class="form-group col-lg-2 col-md-2  col-md-offset-1">
         <label class="control-label" for="PracticeName">Practice Name: </label>
         <input class="form-control" name="PracticeName" id="PracticeName" data-bind="value: PracticeName, event: {change: flagDoctorAsEdited}" />
     </div>
-</div>
-<div class ="col-lg-10 col-md-8 col-sm-6 col-xs-4 col-md-offset-1">
-    <table class="table table-striped table-bordered table-hover table-condensed">
-        <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Street Address</th>
-            <th>City</th>
-            <th>State</th>
-            <th>Zip</th>
-            <th>Phone Number</th>
-            <th class="col-md-1"><button data-bind="click: addPatient" class="btn btn-info btn-sm">Add Patient</button></th>
-        </tr>
-        <tbody data-bind="foreach: Patients">
-            <tr>
-                <td class="form-group"><input class="form-control input-sm" data-bind="value: FirstName, event: {change: flagPatientAsEdited}, hasfocus: true" /></td>
-                <td class="form-group"><input class="form-control input-sm" data-bind="value: LastName, event: {change: flagPatientAsEdited}" /></td>
-                <td class="form-group"><input class="form-control input-sm" data-bind="value: Street, event: {change: flagPatientAsEdited}" /></td>
-                <td class="form-group"><input class="form-control input-sm" data-bind="value: City, event: {change: flagPatientAsEdited}" /></td>
-                <td class="form-group"><input class="form-control input-sm" data-bind="value: State, event: {change: flagPatientAsEdited}" /></td>
-                <td class="form-group"><input class="form-control input-sm" data-bind="value: ZipCode, event: {change: flagPatientAsEdited}" /></td>
-                <td class="form-group"><input class="form-control input-sm" data-bind="value: PhoneNumber, event: {change: flagPatientAsEdited}" /></td>
-                <td class="form-group"><button class="btn btn-danger btn-sm" data-bind="click: $parent.deletePatient">Delete</button></td>
-            </tr>
-        </tbody>
-    </table>
-    <div><button data-bind="click: save" class="btn btn-primary">Save</button></div>
-</div>
+    <div class="form-group col-lg-2 col-md-2  col-md-offset-1">
+        <label class="control-label" for="Photo">Photo: </label>
+        <input class="form-control" name="Photo" id="Photo" data-bind="value: Photo, event: {change: flagDoctorAsEdited}" />
+    </div>
 
- 
-   
+    <div class="col-lg-10 col-md-8 col-sm-6 col-xs-4 col-md-offset-1">
+        <table class="table table-striped table-bordered table-hover table-condensed">
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Street Address</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Zip</th>
+                <th>Phone Number</th>
+                <th class="col-md-1"><button data-bind="click: addPatient" class="btn btn-info btn-sm">Add Patient</button></th>
+            </tr>
+            <tbody data-bind="foreach: Patients">
+                <tr>
+                    <td class="form-group"><input class="form-control input-sm" required data-bind="value: FirstName, event: {change: flagPatientAsEdited}, hasfocus: true" /></td>
+                    <td class="form-group"><input class="form-control input-sm" required data-bind="value: LastName, event: {change: flagPatientAsEdited}" /></td>
+                    <td class="form-group"><input class="form-control input-sm" data-bind="value: Street, event: {change: flagPatientAsEdited}" /></td>
+                    <td class="form-group"><input class="form-control input-sm" data-bind="value: City, event: {change: flagPatientAsEdited}" /></td>
+                    <td class="form-group"><input class="form-control input-sm" data-bind="value: State, event: {change: flagPatientAsEdited}" /></td>
+                    <td class="form-group"><input class="form-control input-sm" data-bind="value: ZipCode, event: {change: flagPatientAsEdited}" /></td>
+                    <td class="form-group"><input class="form-control input-sm" data-bind="value: PhoneNumber, event: {change: flagPatientAsEdited}" /></td>
+
+                    <td class="form-group"><button class="btn btn-danger btn-sm" data-bind="click: $parent.deletePatient">Delete</button></td>
+                </tr>
+            </tbody>
+        </table>
+        <div><button data-bind="click: save" class="btn btn-primary">Save</button></div>
+    </div>
+
+
+</form>
 
 

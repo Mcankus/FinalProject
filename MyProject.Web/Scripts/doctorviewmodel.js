@@ -5,6 +5,7 @@
     Deleted: 3
 };
 
+
 var patientMapping = {
     'Patients': {
         key: function(patient) {
@@ -16,6 +17,8 @@ var patientMapping = {
 
     }
 };
+
+
 
 PatientViewModel = function(data) {
     var self = this;
@@ -58,7 +61,7 @@ DoctorViewModel = function (data) {
         };
 
     self.addPatient = function() {
-        var patient = new PatientViewModel({ PatientId: 0, FirstName: "First", LastName: "Last", Street: "", City: "", State: "", ZipCode: "", PhoneNumber: "", ObjectState: ObjectState.Added });
+        var patient = new PatientViewModel({ PatientId: 0, FirstName: "", LastName: "", Street: "", City: "", State: "", ZipCode: "", PhoneNumber: "", ObjectState: ObjectState.Added });
         self.Patients.push(patient);
     };
 

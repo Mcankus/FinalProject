@@ -254,6 +254,12 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
+    <Content Include="Images\doctor-1.jpg" />
+    <Content Include="Images\doctor-2.jpg" />
+    <Content Include="Images\doctor-3.jpg" />
+    <Content Include="Images\doctor-4.jpg" />
+    <Content Include="Images\doctor-5.jpg" />
+    <Content Include="Images\doctor-6.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\doctorviewmodel.js" />

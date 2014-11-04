@@ -17,6 +17,7 @@ namespace MyProject.Web.ViewModels
         public string DoctorName { get; set; }
         public string PracticeName { get; set; }
         public int DoctorId { get; set; }
+        public string Photo { get; set; }
 
         public string MessageToClient { get; set; }
 

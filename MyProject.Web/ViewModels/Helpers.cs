@@ -15,6 +15,7 @@ namespace MyProject.Web.ViewModels
             doctorViewModel.DoctorId = doctor.DoctorId;
             doctorViewModel.DoctorName = doctor.DoctorName;
             doctorViewModel.PracticeName = doctor.PracticeName;
+            doctorViewModel.Photo = doctor.Photo;
             doctorViewModel.ObjectState = ObjectState.Unchanged;
 
             foreach (Patient patient in doctor.Patients)
@@ -47,6 +48,7 @@ namespace MyProject.Web.ViewModels
             doctor.DoctorId = doctorViewModel.DoctorId;
             doctor.DoctorName = doctorViewModel.DoctorName;
             doctor.PracticeName = doctorViewModel.PracticeName;
+            doctor.Photo = doctorViewModel.Photo;
             doctor.ObjectState = doctorViewModel.ObjectState;
 
             int temporaryPatientId = -1;
@@ -88,11 +90,11 @@ namespace MyProject.Web.ViewModels
             switch (objectState)
             {
                 case ObjectState.Added:
-                    messageToClient = string.Format("{0} has been added to the database.", doctorName);
+                    messageToClient = string.Format("{0}'s has been added the database.", doctorName);
                     break;
 
                 case ObjectState.Modified:
-                   messageToClient = string.Format("The doctors name has been updated to {0} in the database.", doctorName);
+                   messageToClient = string.Format("{0}'s profile has been updated in the database.", doctorName);
                     break;
 
             }
